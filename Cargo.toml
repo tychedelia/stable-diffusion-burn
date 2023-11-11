@@ -10,15 +10,15 @@ wgpu-backend = ["burn-wgpu"]
 
 [dependencies.burn-wgpu]
 package = "burn-wgpu"
-git = "https://github.com/burn-rs/burn.git"
+version = "0.10"
 optional = true
 
 [dependencies]
-burn = "0.9"
-burn-ndarray = "0.9"
-burn-tch = "0.9" 
-burn-autodiff = "0.9" 
-tch = "0.13.0"
+burn = "0.10"
+burn-ndarray = "0.10"
+burn-tch = "0.10" 
+burn-autodiff = "0.10" 
+tch = "0.14.0"
 serde = {version = "1.0.171", features = ["std", "derive"]}
 npy = "0.4.0"
 num-traits = "0.2.15"

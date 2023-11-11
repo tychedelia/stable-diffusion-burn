@@ -38,9 +38,9 @@ fn whitespace_clean(text: &str) -> String {
     text.split_whitespace().collect::<Vec<&str>>().join(" ")
 }
 
-fn load_merges(path: &str) -> io::Result<Vec<(String, String)>> {
-    let file = File::open(&path)?;
-    let reader = io::BufReader::new(file);
+fn load_merges() -> io::Result<Vec<(String, String)>> {
+    let file = include_bytes!("../bpe_simple_vocab_16e6.txt");
+    let reader = io::BufReader::new(&file[..]);
 
     let mut merges = Vec::new();
 
@@ -89,7 +89,7 @@ impl SimpleTokenizer {
         let byte_encoder: HashMap<_, _> = byte_unicode_values.iter().cloned().collect();
         let byte_decoder = byte_encoder.iter().map(|(k, v)| (*v, *k)).collect();
 
-        let merges = load_merges("bpe_simple_vocab_16e6.txt")?;
+        let merges = load_merges()?;
         let merges = merges[1..49152 - 256 - 2 + 1].to_vec();
 
         let vocab = construct_vocab(byte_unicode_values.into_iter().map(|(_, u)| u), &merges[..]);
